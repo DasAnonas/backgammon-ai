@@ -1,7 +1,7 @@
 import { Game } from "long-nardy-engine";
 
 type MoveFunc = (myboard: number[], opponentBoard: number[], moves: { [key: number]: number[] }) => [number, number];
-type Result = 'firstWin' | 'secondWin' | 'draw';
+type Result = 'one' | 'two' | 'draw';
 
 
 class GameSession {
@@ -27,7 +27,7 @@ class GameSession {
 				break;
 		}
 		const result = this.GetResult();
-		console.log(`[Game Session] Game over, result is: ${result === 'firstWin' || result === 'secondWin' ? 'winner is bot ' : ''}${result}, moves count: ${this.engine.Export().gameState?.moveCounter}`);
+		console.log(`[Game Session] Game over, result is: ${result === 'one' || result === 'two' ? 'winner is Bot ' : ''}${result}, moves count: ${this.engine.Export().gameState?.moveCounter}`);
 		return result
 	}
 
@@ -50,7 +50,7 @@ class GameSession {
 		const winner = this.engine.GetWinner();
 		if (!winner)
 			return 'draw';
-		return winner?.isFirst && this.initialDices[0] > this.initialDices[1] || !winner?.isFirst && this.initialDices[0] < this.initialDices[1] ? 'firstWin' : 'secondWin'
+		return winner?.isFirst && this.initialDices[0] > this.initialDices[1] || !winner?.isFirst && this.initialDices[0] < this.initialDices[1] ? 'one' : 'two'
 	}
 }
 
