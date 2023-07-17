@@ -18,6 +18,7 @@ class GameSession {
 	initialDices: [number, number];
 
 	RunGame(): Result {
+		const now = new Date();
 		while (true) {
 			this.RunAllMoves(this.initialDices[0] > this.initialDices[1] ? this.firstBot : this.secondBot);
 			if (this.engine.HasGameEnded())
@@ -27,7 +28,7 @@ class GameSession {
 				break;
 		}
 		const result = this.GetResult();
-		console.log(`[Game Session] Game over, result is: ${result === 'one' || result === 'two' ? 'winner is Bot ' : ''}${result}, moves count: ${this.engine.Export().gameState?.moveCounter}`);
+		console.log(`[Game Session] Game over ${(new Date()).getTime() - now.getTime()}ms, result is: ${result === 'one' || result === 'two' ? 'winner is Bot ' : ''}${result}, moves count: ${this.engine.Export().gameState?.moveCounter}`);
 		return result
 	}
 
