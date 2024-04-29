@@ -1,7 +1,8 @@
-import SimpleBot from "./bots/random-bot";
+import SimpleBot from "./bots/simple-bot";
+import StupidBot from "./bots/stupid-bot";
 import { GameSession } from "./game-session";
 
-const ITERATIONS = 10000;
+const ITERATIONS = 100;
 
 const results = {
 	one: 0,
@@ -10,7 +11,7 @@ const results = {
 }
 const now = new Date();
 for (let i = 0; i<ITERATIONS; i++) {
-	const session = new GameSession(SimpleBot.GetMoveSimple, SimpleBot.GetMoveSimple);
+	const session = new GameSession(SimpleBot.GetMove, StupidBot.GetMove);
 	const res = session.RunGame();
 	results[res] ++;
 }
